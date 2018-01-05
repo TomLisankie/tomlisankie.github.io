@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/tomlisankie
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://tomlisankie.com
+  * I am tomlisankie (https://keybase.io/tomlisankie) on keybase.
+  * I have a public key ASDtfZsxg2L_K02VywkZHxguyaA6ktChswzMW5rFWuwOrwo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0120ed7d9b318362ff2b4d95cb09191f182ec9a03a92d0a1b30ccc5b9ac55aec0eaf0a",
+            "host": "keybase.io",
+            "kid": "0120ed7d9b318362ff2b4d95cb09191f182ec9a03a92d0a1b30ccc5b9ac55aec0eaf0a",
+            "uid": "1168a5fb4cb7ff3e0c4b1c688dd4cc19",
+            "username": "tomlisankie"
+        },
+        "service": {
+            "hostname": "tomlisankie.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.22"
+    },
+    "ctime": 1494805586,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1494805575,
+        "hash": "f3baaa04e3fcdc45d155890828d8caa8220b3daa4fd36d7f1d475fab6c0ba55f9aff4a5400c291f742043ba82b8745dde8ef99e4e2f85e1b78237cf9c5ae781b",
+        "seqno": 1082777
+    },
+    "prev": "3c35e58e580dbf91d39b6d478006ba7678468895554fb51747da2a35da0c546f",
+    "seqno": 6,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg7X2bMYNi/ytNlcsJGR8YLsmgOpLQobMMzFuaxVrsDq8Kp3BheWxvYWTFAvp7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZWQ3ZDliMzE4MzYyZmYyYjRkOTVjYjA5MTkxZjE4MmVjOWEwM2E5MmQwYTFiMzBjY2M1YjlhYzU1YWVjMGVhZjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZWQ3ZDliMzE4MzYyZmYyYjRkOTVjYjA5MTkxZjE4MmVjOWEwM2E5MmQwYTFiMzBjY2M1YjlhYzU1YWVjMGVhZjBhIiwidWlkIjoiMTE2OGE1ZmI0Y2I3ZmYzZTBjNGIxYzY4OGRkNGNjMTkiLCJ1c2VybmFtZSI6InRvbWxpc2Fua2llIn0sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJ0b21saXNhbmtpZS5jb20iLCJwcm90b2NvbCI6Imh0dHA6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjIyIn0sImN0aW1lIjoxNDk0ODA1NTg2LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE0OTQ4MDU1NzUsImhhc2giOiJmM2JhYWEwNGUzZmNkYzQ1ZDE1NTg5MDgyOGQ4Y2FhODIyMGIzZGFhNGZkMzZkN2YxZDQ3NWZhYjZjMGJhNTVmOWFmZjRhNTQwMGMyOTFmNzQyMDQzYmE4MmI4NzQ1ZGRlOGVmOTllNGUyZjg1ZTFiNzgyMzdjZjljNWFlNzgxYiIsInNlcW5vIjoxMDgyNzc3fSwicHJldiI6IjNjMzVlNThlNTgwZGJmOTFkMzliNmQ0NzgwMDZiYTc2Nzg0Njg4OTU1NTRmYjUxNzQ3ZGEyYTM1ZGEwYzU0NmYiLCJzZXFubyI6NiwidGFnIjoic2lnbmF0dXJlIn2jc2lnxECWlw+DdEErr/uBCEicLwxoAX5B/yDJEVYXPZx+QfA+1JxOSsbaPIKM5MZdU9J+A+e8IQgULJlmEesrOe+jw90EqHNpZ190eXBlIKRoYXNogqR0eXBlCKV2YWx1ZcQgbGFT27qzOEWCFsbggmtZFukZx3CLX+LVOQh5KxQ6lYOjdGFnzQICp3ZlcnNpb24B
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tomlisankie
+
+==================================================================

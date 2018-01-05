@@ -1,0 +1,339 @@
+
+/* General
+-------------------------------------------------- */
+
+html{
+
+  background-color: #293a4a;
+
+}
+
+body {
+  /* so this means I might have to change the padding top for body based on what I have for navbar"
+  /* maybe makes a difference once I go */
+  padding-top: 120px;
+  background-color: #293a4a;
+  color:white;
+
+}
+
+
+p {
+  font-family: exo2, sans-serif;
+  text-align: justify;
+  padding-bottom: 15px;
+  font-size: 14px;
+}
+
+p.heading{
+  font-size: 18px;
+  letter-spacing: 1.8px;
+
+}
+
+.unpad {
+  padding-left: 0px;
+  margin-left: 0px;
+
+}
+
+a {
+  color: #cccccc;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+a:hover {
+  color: gray;
+  text-decoration: none;
+}
+
+.spacing {
+  padding-bottom: 30px;
+
+}
+
+.spacing_small {
+  padding-bottom: 10px;
+
+}
+
+
+
+/* Nav bar
+-------------------------------------------------- */
+
+.navbar-default {
+  background-color: #293a4a;
+  border-color: #293a4a;
+  font-family: raleway, sans-serif;
+  padding: 35px 0px 0px 0px;
+  letter-spacing: 1.8px;
+}
+
+.navbar-default .navbar-brand {
+  background-color: inherit;
+  color: white;
+  font-size: 28px;
+  font-family: raleway, sans-serif;
+  font-weight: 800;
+  vertical-align: bottom;
+  /* this padding makes up for the 15 pixel weirdness when shrunk and magnified */
+  padding-left: 28px;
+  letter-spacing: 3px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  background-color: inherit;
+  color: #cccccc;
+  font-family: raleway, sans-serif;
+  vertical-align: bottom;
+  padding-bottom: 0;
+  /* this padding makes up for the 15 pixel weirdness when shrunk and magnified */
+  padding-right: 30px;
+  padding-left: 0px;
+  font-size: 13px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: gray;
+}
+
+.navbar-default .navbar-nav>li.active_nav>a {
+  color: black;
+}
+
+/* the breakpoint for when the navbar turns into a dropdown */
+@media (max-width: 768px) {
+  .navbar-default .navbar-nav>li>a {
+    padding-left: 30px;
+  }
+
+}
+
+/* anything larger than a macbook pro will render like container, non-fluid
+so, incrementally, there will be white space around the content */
+@media (min-width: 1680px) {
+  .container-fluid {
+    width: 1680px;
+    background-color: inherit;
+    color:white;
+  }
+
+}
+
+@media (max-width: 1680px) {
+  .container-fluid {
+    margin: 0px 35px 0px 35px;
+    background-color: inherit;
+  }
+}
+
+
+/* About
+-------------------------------------------------- */
+
+.about_banner {
+  width: 100%;
+  min-width: 1200px;
+  padding-bottom: 30px;
+}
+
+p.about {
+  font-size: 25px;
+}
+
+/* CV
+-------------------------------------------------- */
+
+/* the overall categories listed on the left. */
+p.cv_categories {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  padding: 0px;
+  text-align: left;
+}
+
+/* the container for each cv "chunk"
+   e.g.: all of the items under work experience */
+.cv_section {
+  max-width: 850px;
+  padding: 0px;
+}
+
+.cv_item {
+  padding: 0px;
+  margin-bottom: 15px;
+
+}
+
+.cv_headings {
+  text-align: left;
+}
+
+p.cv_header, p.cv_subheader {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+}
+
+p.cv_description {
+  padding-top: 10px;
+}
+
+/* the container for heading details */
+.cv_heading_details {
+  vertical-align: bottom;
+  padding-top: 5px;
+}
+
+
+p.cv_heading_details {
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  vertical-align: bottom;
+  text-align: right;
+  font-weight: 300;
+}
+
+@media (max-width : 991px) {
+  p.cv_heading_details {
+    text-align: left;
+  }
+}
+
+
+.col-md-12.cv_divider {
+  height: 1px;
+  background-color: #eee;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.cv_divider_outer {
+  margin-right: 30px;
+}
+
+
+/* style for descriptions that are smaller --list format.
+   e.g. skills, or talks, etc.
+   Mostly, this is to get rid of padding on top.
+*/
+p.cv_description_list {
+  padding-top: 2px;
+}
+
+
+/* for project videos already embedded inside a col-md-9 column */
+.col-md-12.project_video {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+/* Contact
+-------------------------------------------------- */
+.massive_header {
+  font-family: raleway, sans-serif;
+  font-size: 100px;
+  text-align: center;
+}
+
+.contact_links {
+  display: inline;
+  font-family: raleway, sans-serif;
+}
+
+.social [class*="fa fa-"] {
+  display: inline-block;
+  width: 100%;
+  background-color: #cacaca;
+  border-radius: 100px;
+  color: rgb(50, 50, 50);
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+.social_icons {
+  text-align: center;
+}
+
+.fa {
+  margin: 40px 5px 5px 5px;
+}
+
+a:hover.fa,
+a:active.fa,
+a:focus.fa {
+  /*color: rgb(51, 51, 51);*/
+  color: #cacaca;
+  text-decoration: none;
+  background-color: rgb(50, 50, 50);
+  /*background-color: #cacaca;*/
+  -webkit-transition: color 0.5s;
+  -moz-transition:    color 0.5s;
+  -ms-transition:     color 0.5s;
+  -o-transition:      color 0.5s;
+  transition:         color 0.5s;
+
+  -webkit-transition: background-color 0.5s;
+  -moz-transition:    background-color 0.5s;
+  -ms-transition:     background-color 0.5s;
+  -o-transition:      background-color 0.5s;
+  transition:         background-color 0.5s;
+}
+
+.contact {
+  margin-top: 100px;
+  font-size: 32px;
+  text-align: center;
+}
+
+/* Sticky footer
+-------------------------------------------------- */
+
+
+html {
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  padding-left: 15px;
+  font-family: raleway, sans-serif;
+  padding-top: 40px;
+}
+
+.col-md-12.footer_divider {
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.footer_divider_outer {
+  margin-right: 15px;
+}
+
+.footer_text {
+  color: #777;
+  font-size: 12;
+}
+
+
+
+
+
