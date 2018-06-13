@@ -1,6 +1,6 @@
 ---
 id: 5
-title: 'First Post and Why I&#8217;ve Never Seriously Blogged Before'
+title: 'First Post and Why I've Never Seriously Blogged Before'
 date: 2016-09-06T22:31:02+00:00
 author: Thomas Lisankie
 layout: post
