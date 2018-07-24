@@ -1,9 +1,18 @@
 ---
-id: 12
-title: About
-date: 2017-02-18T05:02:47+00:00
-author: Thomas Lisankie
 layout: page
-guid: http://tomlisankie.com/blog/?page_id=12
+title: About
+permalink: /about/
 ---
-Hey, this blog is basically for whatever [I](http://tomlisankie.com) feel like talking/writing about. Not all information about some topics may be entirely accurate since I may be writing about something I&#8217;m in the process of learning about.
+
+This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+
+You can find the source code for Minima at GitHub:
+[jekyll][jekyll-organization] /
+[minima](https://github.com/jekyll/minima)
+
+You can find the source code for Jekyll at GitHub:
+[jekyll][jekyll-organization] /
+[jekyll](https://github.com/jekyll/jekyll)
+
+
+[jekyll-organization]: https://github.com/jekyll
