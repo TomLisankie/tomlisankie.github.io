@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-07-24T11:14:29-04:00</updated><id>/</id><title type="html">GOMT</title><subtitle>A blog where I get out my thoughts.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="/jekyll/update/2018/07/24/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-07-24T10:54:59-04:00</published><updated>2018-07-24T10:54:59-04:00</updated><id>/jekyll/update/2018/07/24/welcome-to-jekyll</id><content type="html" xml:base="/jekyll/update/2018/07/24/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Prhymer: How It Works</title><link href="/2017/03/15/prhymer-how-it-works/" rel="alternate" type="text/html" title="Prhymer: How It Works" /><published>2017-03-15T16:48:10-04:00</published><updated>2017-03-15T16:48:10-04:00</updated><id>/2017/03/15/prhymer-how-it-works</id><content type="html" xml:base="/2017/03/15/prhymer-how-it-works/">&lt;p&gt;Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found &lt;a href=&quot;http://tomlisankie.com/projects/prhymer/&quot;&gt;here&lt;/a&gt;). However, it can be generalized to be a &lt;a href=&quot;https://en.wikipedia.org/wiki/Sequence_alignment#Global_and_local_alignments&quot;&gt;global sequence alignment algorithm&lt;/a&gt;. The steps for this algorithm are as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Two sequences of elements are taken as input. We will label the shorter sequence as  &lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&gt;and the longer sequence as &lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(if the sequences are of the same length it is arbitrary which sequence is labeled as  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and which is labeled as &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;). Let  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-95d052bbdff5939edc0f8d73be3abe3f_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#109;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;8&quot; width=&quot;15&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;be the number of elements in &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt; and let &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c972962b2b6b29aedf521d48a070fff3_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#110;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;8&quot; width=&quot;11&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt; be the number of elements in &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;.   2. Find the Cartesian product of &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt; and  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and let&amp;amp;#8217;s call it &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-3be05a969a6ec808074a0ddcde01e03c_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#80;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;14&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;: &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c38132ec0d08c897af0d888bd8176f49_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#80;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#92;&amp;amp;#108;&amp;amp;#101;&amp;amp;#102;&amp;amp;#116;&amp;amp;#32;&amp;amp;#92;&amp;amp;#123;&amp;amp;#32;&amp;amp;#83;&amp;amp;#32;&amp;amp;#92;&amp;amp;#116;&amp;amp;#105;&amp;amp;#109;&amp;amp;#101;&amp;amp;#115;&amp;amp;#32;&amp;amp;#76;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#44;&amp;amp;#32;&amp;amp;#108;&amp;amp;#41;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#124;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#105;&amp;amp;#110;&amp;amp;#32;&amp;amp;#83;&amp;amp;#44;&amp;amp;#32;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#32;&amp;amp;#92;&amp;amp;#105;&amp;amp;#110;&amp;amp;#32;&amp;amp;#76;&amp;amp;#32;&amp;amp;#92;&amp;amp;#114;&amp;amp;#105;&amp;amp;#103;&amp;amp;#104;&amp;amp;#116;&amp;amp;#32;&amp;amp;#92;&amp;amp;#125;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;19&quot; width=&quot;264&quot; style=&quot;vertical-align: -5px;&quot; /&amp;gt;   3. Now let&amp;amp;#8217;s define a matrix &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-f200273c73dab75f221b7a72aa083e3b_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#77;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;19&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt; on the product &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-3be05a969a6ec808074a0ddcde01e03c_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#80;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;14&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt; found in step 2 such that &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c463c62981eec4e55a85d4ad2d315016_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#77;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#92;&amp;amp;#98;&amp;amp;#101;&amp;amp;#103;&amp;amp;#105;&amp;amp;#110;&amp;amp;#123;&amp;amp;#98;&amp;amp;#109;&amp;amp;#97;&amp;amp;#116;&amp;amp;#114;&amp;amp;#105;&amp;amp;#120;&amp;amp;#125;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#99;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#110;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#92;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#118;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#100;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#118;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#92;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#99;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#110;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#101;&amp;amp;#110;&amp;amp;#100;&amp;amp;#123;&amp;amp;#98;&amp;amp;#109;&amp;amp;#97;&amp;amp;#116;&amp;amp;#114;&amp;amp;#105;&amp;amp;#120;&amp;amp;#125;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;76&quot; width=&quot;314&quot; style=&quot;vertical-align: -34px;&quot; /&amp;gt;   4. The row echelon form will then be taken on matrix &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-f200273c73dab75f221b7a72aa083e3b_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#77;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;19&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;. This is done to preserve order and make sure no &amp;amp;#8220;best&amp;amp;#8221; ordered pairs are found on one row that are ahead of best ordered pairs found in later rows as we will see later. Let&amp;amp;#8217;s call the row echelon form  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-45b2f360c5b52f6c4702720ef7bec03c_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#82;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;14&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;such that &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-59a4748b742187323ba187ddc31bb142_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#82;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#92;&amp;amp;#98;&amp;amp;#101;&amp;amp;#103;&amp;amp;#105;&amp;amp;#110;&amp;amp;#123;&amp;amp;#98;&amp;amp;#109;&amp;amp;#97;&amp;amp;#116;&amp;amp;#114;&amp;amp;#105;&amp;amp;#120;&amp;amp;#125;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#99;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#48;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#110;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#92;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#118;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#100;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#118;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#92;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#110;&amp;amp;#45;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#92;&amp;amp;#99;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#115;&amp;amp;#32;&amp;amp;#92;&amp;amp;#59;&amp;amp;#92;&amp;amp;#59;&amp;amp;#32;&amp;amp;#40;&amp;amp;#115;&amp;amp;#95;&amp;amp;#123;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#44;&amp;amp;#92;&amp;amp;#58;&amp;amp;#32;&amp;amp;#108;&amp;amp;#95;&amp;amp;#123;&amp;amp;#110;&amp;amp;#45;&amp;amp;#49;&amp;amp;#125;&amp;amp;#41;&amp;amp;#32;&amp;amp;#38;&amp;amp;#32;&amp;amp;#92;&amp;amp;#101;&amp;amp;#110;&amp;amp;#100;&amp;amp;#123;&amp;amp;#98;&amp;amp;#109;&amp;amp;#97;&amp;amp;#116;&amp;amp;#114;&amp;amp;#105;&amp;amp;#120;&amp;amp;#125;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;76&quot; width=&quot;351&quot; style=&quot;vertical-align: -34px;&quot; /&amp;gt;   5. We then apply a similarity/cost function,  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-4a6a1a29318309672acf99704b5703a3_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#99;&amp;amp;#40;&amp;amp;#40;&amp;amp;#115;&amp;amp;#44;&amp;amp;#108;&amp;amp;#41;&amp;amp;#41;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;18&quot; width=&quot;56&quot; style=&quot;vertical-align: -4px;&quot; /&amp;gt;to all ordered pairs in &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-45b2f360c5b52f6c4702720ef7bec03c_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#82;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;14&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;.   6. Starting at row &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-95d052bbdff5939edc0f8d73be3abe3f_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#109;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;8&quot; width=&quot;15&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;, we find the ordered pair within the range  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-972003edbcd37ab224ff577f7d669a45_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#48;&amp;amp;#32;&amp;amp;#92;&amp;amp;#108;&amp;amp;#101;&amp;amp;#113;&amp;amp;#32;&amp;amp;#105;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;15&quot; width=&quot;39&quot; style=&quot;vertical-align: -3px;&quot; /&amp;gt;where, initially,  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-1e432c94637061c416641846150cb4ec_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#105;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#110;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;41&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;with the highest similarity (or lowest if it&amp;amp;#8217;s a cost function) and add it to the similarity/cost values of the ordered pairs in the row above it (in this case row &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-19985356f2ebafe23198a171ba714423_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#109;&amp;amp;#45;&amp;amp;#49;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;13&quot; width=&quot;45&quot; style=&quot;vertical-align: -1px;&quot; /&amp;gt;).   7. We set  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-67494ad7556bce61778e1cf04bd3006b_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#105;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;6&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;to whatever index that the ordered pair from step 6 was found at to a list of indices  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-0483fc2127dc46ac432b570290161e5d_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#73;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;9&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;that we will later apply a gap penalty function to.   8. Steps 6-7 are repeated until all rows have been examined. The total similarity/cost value that was found is then stored in &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-38ae40ac683a606b2770cce5b8ca8237_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#116;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;6&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;.   9. A gap penalty function  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-5250cbfab192d7d52affc80ef9fedcfe_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#112;&amp;amp;#40;&amp;amp;#73;&amp;amp;#41;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;18&quot; width=&quot;32&quot; style=&quot;vertical-align: -4px;&quot; /&amp;gt;is then applied to the list of indices  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-0483fc2127dc46ac432b570290161e5d_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#73;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;9&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and subtracted from  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-38ae40ac683a606b2770cce5b8ca8237_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#116;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;6&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;so that  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35039793b5e01ebf394f7b0608047964_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#102;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#116;&amp;amp;#32;&amp;amp;#45;&amp;amp;#32;&amp;amp;#112;&amp;amp;#40;&amp;amp;#73;&amp;amp;#41;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;18&quot; width=&quot;93&quot; style=&quot;vertical-align: -4px;&quot; /&amp;gt;where &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-d87eed044670eb60b7d80f75e60d6aaa_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#102;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;16&quot; width=&quot;10&quot; style=&quot;vertical-align: -4px;&quot; /&amp;gt;is the final similarity/cost score between the sequences  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;.  10. However, finding the similarity score is not enough since scores will vary relative to the sizes of the two sequences. For example, two small yet highly similar sequences may have a similarity score of 3 while two large yet dissimilar sequences may have a similarity score of 10. Thus, it is important to find a percentage of similarity for any two given sequences. To do this we simply find the similarity score (steps 1-9) of sequence  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;on itself (let&amp;amp;#8217;s call this&amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-cd244aecfeaff20796a3225a17f333e6_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#104;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;13&quot; width=&quot;10&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;) and divide  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-d87eed044670eb60b7d80f75e60d6aaa_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#102;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;16&quot; width=&quot;10&quot; style=&quot;vertical-align: -4px;&quot; /&amp;gt;by  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-cd244aecfeaff20796a3225a17f333e6_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#104;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;13&quot; width=&quot;10&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;to get the similarity (or dissimilarity if it was a cost function that was applied) ratio which we can then turn into a percentage where &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-49a2bdb80083d650a843219c2f55dc76_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#114;&amp;amp;#32;&amp;amp;#61;&amp;amp;#32;&amp;amp;#92;&amp;amp;#102;&amp;amp;#114;&amp;amp;#97;&amp;amp;#99;&amp;amp;#123;&amp;amp;#102;&amp;amp;#125;&amp;amp;#123;&amp;amp;#104;&amp;amp;#125;&amp;amp;#92;&amp;amp;#99;&amp;amp;#100;&amp;amp;#111;&amp;amp;#116;&amp;amp;#32;&amp;amp;#49;&amp;amp;#48;&amp;amp;#48;&amp;amp;#32;&amp;amp;#92;&amp;amp;#37;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;23&quot; width=&quot;98&quot; style=&quot;vertical-align: -6px;&quot; /&amp;gt;  11. We&amp;amp;#8217;re not done yet. Some sequences may actually have a higher similarity percentage by removing elements starting from the first element of  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and repeating steps 1-10 on the newly formed  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;and the original  &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#76;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;(this is especially important for the original purpose of Prhymer since some shorter words may rhyme in the middle of the longer). Once there are no more elements in &amp;lt;img src=&quot;http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png&quot; class=&quot;ql-img-inline-formula quicklatex-auto-format&quot; alt=&quot;&amp;amp;#83;&quot; title=&quot;Rendered by QuickLaTeX.com&quot; height=&quot;12&quot; width=&quot;12&quot; style=&quot;vertical-align: 0px;&quot; /&amp;gt;, the highest similarity percentage is chosen as the &amp;amp;#8220;true&amp;amp;#8221; similarity score.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Now that we have a step by step procedure, let’s do an example on two words. But before we do our example, we must define our similarity function for an ordered pair of phonemes as well as our gap penalty function. The similarity function will award a score based on the following table:&lt;/p&gt;
+
+&lt;table style=&quot;width: 625px; height: 193px;&quot; border=&quot;2&quot; cellpadding=&quot;2&quot;&gt;
+  &lt;tr&gt;
+    &lt;td style=&quot;width: 120px;&quot;&gt;
+       &lt;strong&gt;Comparison Case&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;width: 502px;&quot;&gt;
+       &lt;strong&gt;Number of Points Awarded&lt;/strong&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;width: 120px;&quot;&gt;
+       Vowel and Vowel
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;width: 502px;&quot;&gt;
+       5 &amp;#8211; (number of features they don&amp;#8217;t share) &amp;#8211; (difference in stress)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;width: 120px;&quot;&gt;
+       Consonant and Consonant
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;width: 502px;&quot;&gt;
+       2 &amp;#8211; (0.15 * (number of features they don&amp;#8217;t share)) &amp;#8211; (0.1 if they both aren&amp;#8217;t voiced) &amp;#8211; (1 if they both aren&amp;#8217;t sonorous)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;width: 120px;&quot;&gt;
+       Vowel and Consonant
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;width: 502px;&quot;&gt;
+      (0.1 * (the number of features that they have in common)) + (0.1 if they both are voiced) + (1 if they&amp;#8217;re both sonorous)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The features that are referred to are &lt;a href=&quot;https://en.wikipedia.org/wiki/Distinctive_feature&quot;&gt;distinctive features&lt;/a&gt;. A list of the features that are used in the implementation can be found &lt;a href=&quot;http://tomlisankie.com/pronunciation-algorithm-resources/feature-to-number-reference.txt&quot;&gt;here&lt;/a&gt;. In addition, the phonemes that are used for words come from the &lt;a href=&quot;http://www.speech.cs.cmu.edu/cgi-bin/cmudict&quot;&gt;CMU Pronouncing Dictionary&lt;/a&gt; and the list of the phonemes and their respective features that will be used can be found &lt;a href=&quot;http://tomlisankie.com/pronunciation-algorithm-resources/features.txt&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The gap penalty function is as follows: ((number of spaces between indices of ordered pairs) * 0.25) + log(1 + number of spaces from first ordered pair used to 0) + log(number of spaces from last ordered pair used to length of longest sequence + 1).&lt;/p&gt;
+
+&lt;p&gt;Using this, let’s go through an example using the words “ship” (SH IH1 P) and “shifter” (SH IH1 F T ER0). Let’s just skip right ahead to the matrix found on the Cartesian product of these two sequences:&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, SH)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, IH1)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, SH)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, IH1)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, SH)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, IH1)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+       (P, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Let’s take the row echelon form on it:&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, SH)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, IH1)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (SH, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, IH1)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (IH1, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, F)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      (P, T)
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+       (P, ER0)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;And let’s replace the ordered pairs with their numeric value after the similarity function is applied to all of them:&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      2
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      0.1
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.3
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.15
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      0.3
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      5
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      0.1
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.3
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.45
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;And now let’s do steps 6-7 (detailed above) and keep track of the indices of the chosen ordered pairs. In addition a “-” will replace ordered pairs that can no longer be accessed along the way:&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      2
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      0.1
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.3
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.15
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      6.45
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      1.55
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Indices: [3]&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      8.45
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Indices: [3, 1]&lt;/p&gt;
+
+&lt;table class=&quot;tg&quot;&gt;
+  &lt;tr&gt;
+    &lt;th class=&quot;tg-031e&quot;&gt;
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      SH
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      IH1
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      F
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      T
+    &lt;/th&gt;
+    
+    &lt;th class=&quot;tg-e3zv&quot;&gt;
+      ER0
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;SH&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &lt;em&gt;8.45&lt;/em&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;IH1&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td class=&quot;tg-e3zv&quot;&gt;
+      &lt;strong&gt;P&lt;/strong&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+    
+    &lt;td class=&quot;tg-031e&quot;&gt;
+      &amp;#8211;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Indices: [3, 1, 0]&lt;/p&gt;
+
+&lt;p&gt;Now, we’ve reached the end of the process with 8.45 as our similarity score before the gap penalty is applied. Applying the gap penalty to the list of indices, we get (0.25*1) + log(1) + log(2) = 0.55. This means our final similarity score will be 8.45 – 0.55 = 7.9.&lt;/p&gt;
+
+&lt;p&gt;But we’re not done yet. We now need to find the similarity score of SH IH1 F T ER0 on itself. This comes out to be 16. And then we calculate the similarity percentage as described in step 10 above and we get (7.9/16)*100% = 49.375%&lt;/p&gt;
+
+&lt;p&gt;And now we of course go through step 11 by removing the entire first row of ordered pairs in our matrix and applying steps 1-10 on that matrix and so on. I’ll spare you and myself that process though since 49.375% ends up being the highest similarity out of any of these.&lt;/p&gt;</content><author><name>Thomas Lisankie</name></author><summary type="html">Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found here). However, it can be generalized to be a global sequence alignment algorithm. The steps for this algorithm are as follows:</summary></entry><entry><title type="html">Prhymer: How It Came To Be</title><link href="/2017/03/15/prhymer-how-it-came-to-be/" rel="alternate" type="text/html" title="Prhymer: How It Came To Be" /><published>2017-03-15T16:30:11-04:00</published><updated>2017-03-15T16:30:11-04:00</updated><id>/2017/03/15/prhymer-how-it-came-to-be</id><content type="html" xml:base="/2017/03/15/prhymer-how-it-came-to-be/">&lt;h3 id=&quot;if-youre-not-interested-in-the-history-of-why-i-came-to-build-this-go-to-the-post-on-how-it-works&quot;&gt;&lt;em&gt;If you’re not interested in the history of why I came to build this, go to the post on &lt;a href=&quot;http://tomlisankie.com/blog/2017/03/15/prhymer-how-it-works/&quot;&gt;How It Works&lt;/a&gt;.&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;Sometime towards the end of high school in early 2015, I became quite interested in the idea of creating a program that could write rap lyrics. In the process of exploring what it might take to build such a thing, I inevitably came to the problem of finding rhyming words. Finding rhyming words would involve creating some sort of way of finding how well any two given words rhymed with one another.&lt;/p&gt;
+
+&lt;p&gt;Out of all the tasks that would need to be accomplished to build such a thing, this problem seemed to be the simplest so I decided to tackle it first. “What could be so complicated, it’s just a matter of finding alignments between strings?” This, of course, ended up being fairly naive of me. English’s orthography-to-phonology translation happens to be fairly awful so often you’ll have two words that clearly rhyme but do not have similar sequences of characters that would lead you to believe that they rhyme.&lt;/p&gt;
+
+&lt;p&gt;Tackling the fact that English has fairly awful orthography-to-phonology means you’re gonna have to pursue one of two options:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Build some sort of translator that would take substrings of a word that are known to typically create a certain sound and translate them to symbols that represent that sound (what I would later come to find out are called_ &lt;em&gt;_phones&lt;/em&gt;).&lt;/li&gt;
+  &lt;li&gt;Find some sort of database that already has every English word’s spelling along with their symbolized pronunciations.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Not really even thinking that someone might have already done it and I could save myself the work, I set out to build number 1. This ended up being both a fairly straightforward process however with comparatively lousy results. Find common substrings that seem to usually create certain sounds and then write them down in an if-else cluster in a loop where the phonetic translation will be generated. Then you can move on to comparing the sequences of phones you just generated. There are a few problems that arise when building such a translator for English though:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Many characters in the spelling of a word will have their phonetic output changed by the characters or sounds that came before it (sometimes even after). Finding all these cases is fairly troublesome and cases are encountered where the same environment produces two different sounds in different words. This means that the phonetic output of a word cannot be a function of the way it’s spelled.&lt;/li&gt;
+  &lt;li&gt;English orthography-to-phonology is horrible for the aforementioned reason.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Eventually realizing this, I took to Google to see if someone had already made an orthographic-to-phonological English dictionary. And I ended up finding out that &lt;a href=&quot;http://www.speech.cs.cmu.edu/cgi-bin/cmudict&quot;&gt;someone(s) had&lt;/a&gt;. This was a fairly bittersweet moment. Bitter because I had already invested some time here and there for the past few weeks in order to try and make this translator and I didn’t want to see all my hard work being rendered essentially useless. Sweet because I no longer had to worry about all the cases where the phonetic transcription would not be correct and thus the measure of how two words rhyme could be completely off.&lt;/p&gt;
+
+&lt;p&gt;Now that I had an accurate English orthography-to-phonology dictionary, it was time to addressing the real meat of the problem: &lt;strong&gt;how do you compare two sequences of sound to see how well they rhyme?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking back, I should have just googled “sequence comparison algorithms” in order to draw some inspiration for solving this problem (or even better, being able to just directly adopt one to solve the problem). But I did not and ended up taking a fairly non-straightforward process to just end up creating a new sequence comparison algorithm. The most recent version (and the one that is presented in this post) only came about in the last few months in some spare time.&lt;/p&gt;
+
+&lt;p&gt;Even with all this switching of &lt;em&gt;how&lt;/em&gt; I would do this, there was at least one common problem that arose in all versions: how are two elements (phones) considered as being a similar-sounding match and how much weight will each of these matches or non-matches hold? Upon some observation and inspection, I was finding that rhyming words were much more likely to sound like they rhyme if they have similar sequences of the same vowel sounds. Thus, it seemed to make more sense to put a higher value on having similar vowel sounds than similar consonant sounds.&lt;/p&gt;
+
+&lt;p&gt;There was also the problem of having two long sequences being compared usually yielding scores that would be impossible for any two shorter sequences to have. For example, comparing two sequences of sizes 2 and 3 will never yield as high of a score as two sequences of sizes 27 and 33. Thus it’s important to find how well two words rhyme based on a fraction/percentage rather than a raw score. Say the comparison of the former sequences yield a score of 2 while that comparison of the latter sequences yields a score of 22. Just because 22 &amp;gt; 2 doesn’t mean the second pair rhymes better. In fact, the two comparisons share the same &lt;em&gt;fraction&lt;/em&gt; of a score (2/3 and 22/33 are both approximatively equal to 0.67). Thus they both have about 67% commonality.&lt;/p&gt;
+
+&lt;div&gt;
+&lt;/div&gt;</content><author><name>Thomas Lisankie</name></author><category term="algorithm" /><category term="prhymer" /><category term="pronunciation similarity" /><summary type="html">If you’re not interested in the history of why I came to build this, go to the post on How It Works.</summary></entry><entry><title type="html">On Ancient Egypt and Effective Methods for Communicating Complex Information in Society</title><link href="/2017/03/12/on-ancient-egypt-and-effective-methods-for-communicating-complex-information-in-society/" rel="alternate" type="text/html" title="On Ancient Egypt and Effective Methods for Communicating Complex Information in Society" /><published>2017-03-12T16:30:42-04:00</published><updated>2017-03-12T16:30:42-04:00</updated><id>/2017/03/12/on-ancient-egypt-and-effective-methods-for-communicating-complex-information-in-society</id><content type="html" xml:base="/2017/03/12/on-ancient-egypt-and-effective-methods-for-communicating-complex-information-in-society/">&lt;p&gt;I’ve been delaying writing and publishing a blog post for some time now. So I figure I should just write something and put it out there even if it doesn’t live up to what I think a blog post “should be” in my head.&lt;/p&gt;
+
+&lt;p&gt;Today I was watching an &lt;a href=&quot;https://www.youtube.com/watch?v=bGu7MLp574A&quot;&gt;episode of The Joe Rogan Experience featuring John Anthony West&lt;/a&gt;. Around the 20 minute mark, West was speaking about how the Ancient Egyptians constructed many of their “myths” as a means of explaining esoteric concepts about cosmology that their early mathematicians and astronomers had come to understand. They were meant to convey the very nature of the world and all that was understood about the universe at the time through stories and the symbolism within those stories. This, he believes, is one of the reasons Ancient Egyptian civilization was able to last so long. The majority of individuals were able to appreciate and understand the structure of the known universe at the time even if they didn’t understand the mathematics behind it. An appreciation and understanding of all of this was embedded within the culture itself. And it became embedded in the culture because these stories that explained “how everything works” had an &lt;em&gt;emotional&lt;/em&gt; impact.&lt;/p&gt;
+
+&lt;p&gt;“This is an infinitely superior way of communicating knowledge because you don’t have to be an expert,” West says. “It soaks into your &lt;em&gt;bones&lt;/em&gt; in such a way that it directs, personally and collectively, people’s behaviors.” And I find myself agreeing with this in a way. It doesn’t take any sort of genius to understand that if you affect people’s emotions on a deep level on a mass scale, they’ll direct their energies towards the things that they see as important. Plus, if everyone is on the same page, you get de facto unification amongst the people and that sure as hell helps in maintaining a civilization. And if the bodies of knowledge that these people are directing their energy at are fairly complex in nature, you’re going to get a civilization that values advancement in these areas. They will want to further understand these ideas that they are deeply emotionally excited about. It helps explain why the Ancient Egyptians were so incredibly advanced technologically.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s fast forward to modern civilization, particularly that in the United States. Do we have these sorts of stories dedicated to conveying complex concepts and making sure that they affect people on an emotional level? No, not really. There are attempts to explain these very complex concepts in ways that anyone, even without any scientific knowledge, would understand. But none of these methods have a conventional deep emotional impact that something like religion has. So in return we get a populace that is anything but unified, doesn’t understand much about anything, and most importantly has no real &lt;em&gt;reason to be&lt;/em&gt; (exist). Our passions are too scattered and sometimes too trivial to push forward deep scientific advancement on a massive scale. Sure, technological advancement of the contemporary era is unparalleled in many respects when compared to past civilization. But imagine what it could be if the people had a unifying force that was based in a deep seated emotional place in the majority of individuals.&lt;/p&gt;
+
+&lt;p&gt;There are downsides to having a civilization based around stories though. Whenever a new advancement is made or some sort of change happens, you have to either add on to the overarching story which can sometimes be problematic since other aspects of the story may become nonsense once the new information is added. Or you just keep in mind that these are all stories meant to represent an understanding of raw information and structure. This of course then has the problem of not being able to grab in as many people because they don’t get to emotionally dedicate themselves to a particular story or set of ideas. Thus, I believe that the only real way to get around this is to have the emotionality connected to the learning and advancement in understanding of nature.&lt;/p&gt;
+
+&lt;p&gt;Of course, there’s so many other factors at play and to say that this is the sole reason for modern problems lacks nuance. Just some thoughts though. I woke up a bit cloudy headed today and am thus a little bit scatterbrained.&lt;/p&gt;</content><author><name>Thomas Lisankie</name></author><category term="ancient egypt" /><category term="civilization" /><category term="progress" /><category term="science" /><category term="technology" /><summary type="html">I’ve been delaying writing and publishing a blog post for some time now. So I figure I should just write something and put it out there even if it doesn’t live up to what I think a blog post “should be” in my head.</summary></entry><entry><title type="html">The Plastic Man</title><link href="/2016/09/17/the-plastic-man/" rel="alternate" type="text/html" title="The Plastic Man" /><published>2016-09-17T18:31:26-04:00</published><updated>2016-09-17T18:31:26-04:00</updated><id>/2016/09/17/the-plastic-man</id><content type="html" xml:base="/2016/09/17/the-plastic-man/">&lt;p&gt;&lt;em&gt;The following is a poem sort of thing I wrote about a figure I saw over the summer who, to me, represented the devil.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This summer, I met the devil. He had tightly gelled back sugar brown hair, white skin like mine, and a shiny, toothy grin that never left his face. His entirety, hair, head, body, and all the rest was made of a hard plastic. Despite this, he didn’t seem to suffer anatomically. He had a jaw a bit pointier than mine and was a little it shorter but we looked as if we could be related. Even though he was made entirely of plastic, it was the fact that he had no eyes that gave me unease. What would normally be creamy pools with centered, colored islands were instead jet black holes that led directly to the back of his fabricated skull.&lt;/p&gt;
+
+&lt;p&gt;He began to approach me, at times struggling to keep his head (which was entirely too large for his body) upright. He wore a wrinkle-free three-piece that would traditionally be associated with the uptight. When he first spoke to me, it reminded me of how it used to sound when you tried to talk through your mask while trick-or-treating as a kid. The smile never moved from his face as he joked with me. He had a certain charm about him and told me that if I ever felt I needed advice, to come visit him at his office. And so I did, time and time again I visited him.&lt;/p&gt;
+
+&lt;p&gt;He would tell me about the money was the most important thing. How the vanity was what you should absorb yourself in. Not code, not notes, not jokes. The appearance was all that mattered to him. It was hard not to let part of me fall for it. Anyway, he was always smiling why wouldn’t he be trying to help me?&lt;/p&gt;
+
+&lt;p&gt;But eventually I grew skeptical. I started trying to read him for myself. I started paying closer attention. To the echoes of his voice. To the fact that I couldn’t tell his intention from his eyes or lack thereof. What did all of this mean in context? And I realized it. He was every Wall Street banker and corrupt congressman. He was part of the perpetual misery machine. He was the recruiter assigned to me, he was my own personal devil.&lt;/p&gt;
+
+&lt;p&gt;But if he was the devil, who was god? I was. In my own flesh and blood, I was the one with the answers. I was god. Why had I been looking for advice and answers from someone who was totally empty? Echoed his own words internally as he spoke? Why? Because of his charisma? Because he always told me what I wanted to hear? He was not trying to help me right my wrongs. In fact, he was helping me write them. I needed to look inside of myself for answers. Myself, the one who was full of life. The one who had stretchable skin and internal organs, and a conscience. I was the one I needed to rely upon, not the empty.&lt;/p&gt;</content><author><name>Thomas Lisankie</name></author><category term="early days" /><summary type="html">The following is a poem sort of thing I wrote about a figure I saw over the summer who, to me, represented the devil.</summary></entry><entry><title type="html">What Drew Me to Working with Rhymes and Lite Computational Phonology</title><link href="/2016/09/10/what-drew-me-to-working-with-rhymes-and-lite-computational-phonology/" rel="alternate" type="text/html" title="What Drew Me to Working with Rhymes and Lite Computational Phonology" /><published>2016-09-10T18:31:20-04:00</published><updated>2016-09-10T18:31:20-04:00</updated><id>/2016/09/10/what-drew-me-to-working-with-rhymes-and-lite-computational-phonology</id><content type="html" xml:base="/2016/09/10/what-drew-me-to-working-with-rhymes-and-lite-computational-phonology/">&lt;p&gt;In high school, I discovered &lt;a href=&quot;https://open.spotify.com/album/4FWvo9oS4gRgHtAwDwUjiO&quot;&gt;The Black Album&lt;/a&gt; by Jay Z. More specifically I had been listening to &lt;a href=&quot;http://maxtannone.com/jaydiohead/&quot;&gt;Jaydiohead&lt;/a&gt; which I had been initially put onto (but had never really listened to in any sort of significant way) by a video from Ray William Johnson’s vlog when I was in seventh or eighth grade and then decided to listen to the pure version of The Black Album.&lt;/p&gt;
+
+&lt;p&gt;I loved it. Jay Z was putting together these rhyme schemes that didn’t just have flow and sound good but were also telling some sort of story/stories (also, I should note, about an environment that was essentially completely foreign to me which made it even more interesting) and also just bragging for the sake of it. I became fascinated with the fact that Jay was putting this together almost like a puzzle – creating a rhyme scheme with flow but also not sacrificing the story element.&lt;/p&gt;
+
+&lt;p&gt;As I continued through high school I thought “what if I could create an algorithm that would compare words to one another and then suggest rhymes based on how similar they were.” This question essentially birthed what all my personal project time has been dedicated to for the last two years or so and what has spawned my interest in computational linguistics with an integration of music theory (this is how I describe it anyway, it’s possible that this is is a field that I don’t know about. In which case, please tell me).&lt;/p&gt;
+
+&lt;p&gt;So, senior year I started to work on it. At first (I must have began in March of 2015) I was just picking apart songs and listing the words that rhymed, etc. so that I could try and see any patterns in the spelling of words that would allow for me to abstract in order to develop a method for comparing words. Granted, this didn’t end up working since English doesn’t exactly have a 1:1 grapheme (letter) to phoneme (sound) translation (for example, the word “one” is definitely not spelled as it sounds (w-uh-n)).&lt;/p&gt;
+
+&lt;p&gt;During the remainder of the school year, I sparsely worked on it but picked up working on it more over the summer. I had found a list of rules online for how one would generally go about translating specific strings of characters of sounds in many English words into their corresponding sounds. I spent a good amount of time at my local coffee shop (unfortunately just a Starbucks) translating these rules into pseudocode. Basically it would have just been a program that takes a giant list of English words and then outputs a phonemic translation of each word which I would then use as a database for the actual rhyme algorithm. Although I remember having all sorts of weird ideas about how I was actually going to store the phonemic translations such as putting it in some sort of XML tree structure which is by no means efficient as I found out later.&lt;/p&gt;
+
+&lt;p&gt;But then I decided to actually go online and google to see whether someone had, y’know, already done this and whether it had been done well or not so I could see if I was wasting my time trying to reinvent the wheel. And lo and behold, I came across &lt;a href=&quot;http://www.speech.cs.cmu.edu/cgi-bin/cmudict&quot;&gt;The CMU Pronouncing Dictionary&lt;/a&gt; which had every word in the English language (many of which are completely useless and would never come up in any but the most obscure scenarios, but that’s another story) along with that word’s phonemic translation in &lt;a href=&quot;https://en.wikipedia.org/wiki/Arpabet&quot;&gt;ARPAbet&lt;/a&gt;. This is exactly what I had been trying to do but even more efficiently so! This presented a bittersweet feeling for me though. Sweet because I no longer had to spend time trying to write a program that would produce this exact same result and could instead move on to the fun part of actually creating the rhyme algorithm. Bitter because I had just spent three weeks (obviously not every waking hour or anything, but definitely working on it here and there) wasting my time to try and create a database that already existed for free.&lt;/p&gt;
+
+&lt;p&gt;This taught me an important lesson though: whenever you’re working on a project and you identify a piece of information, see if it’s already been done so that you don’t end up wasting your time. And the thing is, I did know this in the back of my head. But I had been preventing myself from looking up this information because I didn’t want to bruise my own ego and feel as if I had been completely wasting my time and add to my fear of “I’ll never be able to create anything new because someone will always have gotten to it before me.” But that’s so counter-productive because why wouldn’t I want to know if I had been wasting my time? Why wouldn’t I want to move forward with my life and move on to better, more interesting things if I could? Knowing something is always better than not knowing something (there is rarely an exception to this when it comes to personal relationships, but that usually has more to do with obsessing over a piece of information about that person rather than simply just knowing it). And if that knowledge makes you sad, it can typically be remedied through applying a different attitude to the situation, focusing on something else, or doing something to change it.&lt;/p&gt;
+
+&lt;p&gt;Anyway, once I had this database I was free to actually develop the core of this whole endeavor which was (and to some extent still is) an algorithm for comparing the pronunciations of two words and then outputting a percentage of how similar their pronunciation is (aka how well they rhyme). I’m not actually gonna describe the algorithm in this post (I completed the first working version of it in November 2015 and have been tweaking it on and off ever since), but I will in a future post once I have the app on the iOS App Store (after all, after I spent all this time on it, why would I want someone else to be the first to use it in a practical application).&lt;/p&gt;</content><author><name>Thomas Lisankie</name></author><category term="early days" /><summary type="html">In high school, I discovered The Black Album by Jay Z. More specifically I had been listening to Jaydiohead which I had been initially put onto (but had never really listened to in any sort of significant way) by a video from Ray William Johnson’s vlog when I was in seventh or eighth grade and then decided to listen to the pure version of The Black Album.</summary></entry><entry><title type="html">My First Replication of a Machine Learning Paper</title><link href="/2016/09/06/first-post-and-why-ive-never-seriously-blogged-before/" rel="alternate" type="text/html" title="My First Replication of a Machine Learning Paper" /><published>2016-09-06T18:31:02-04:00</published><updated>2016-09-06T18:31:02-04:00</updated><id>/2016/09/06/my-first-replication-of-a-machine-learning-paper</id><content type="html" xml:base="/2016/09/06/first-post-and-why-ive-never-seriously-blogged-before/">&lt;p&gt;I recently decided to replicate a really interesting paper I read on identifying metaphors in text with word embeddings and visual features. The paper is called &lt;a href=&quot;http://www.aclweb.org/anthology/N16-1020&quot;&gt;&lt;em&gt;Black Holes and White Rabbits: Metaphor Identification with Visual Features&lt;/em&gt;&lt;/a&gt; and it is the first paper that uses word and phrase embeddings for metaphor identification as well as the first paper that integrates representations found from both linguistic and visual data. I’ve been extremely interested in machine learning techniques and others for identifying conceptual metaphors and other for a couple of years now. Not only is it ridiculously interesting, but I think it’s one of the most important areas to be worked on in NLP for drastically decreasing the friction involved in interacting with natural language systems. Given the prevalence of analogy, conceptual metaphor, and other forms of domain transfer in our everyday language, progress on this problem would lead to drastic improvement in natural language processing systems and possibly even the beginning of true natural language &lt;em&gt;understanding&lt;/em&gt; systems. Because of all these reasons, I saw replicating this paper as a worthwhile effort in order to get a feel for the amount of work that went into it, gain further experience with building NLP systems, and have my own copy of the work to use in my own projects.&lt;/p&gt;
+
+&lt;h1 id=&quot;paper-overview&quot;&gt;Paper Overview&lt;/h1&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;The paper begins by speaking about why metaphor processing is important to advancing NLP systems and what conceptual metaphor is. They differentiate their approach from the others by being the first approach to use both linguistic and visual representations for metaphor identification as well as being the first to apply word and phrase embeddings to metaphor identification.&lt;/p&gt;
+
+&lt;h2 id=&quot;related-work&quot;&gt;Related Work&lt;/h2&gt;
+
+&lt;p&gt;I decided to not summarize the Related Work section since it will likely lead to tangents away from this paper.&lt;/p&gt;
+
+&lt;h2 id=&quot;method&quot;&gt;Method&lt;/h2&gt;
+
+&lt;h3 id=&quot;learning-linguistic-representations&quot;&gt;Learning Linguistic Representations&lt;/h3&gt;
+
+&lt;p&gt;The authors decided to use the skip-gram version of the Word2Vec model with negative-sampling. (If you know how Wod2Vec works just skip to “The Rest of the Authors’ Method”)&lt;/p&gt;
+
+&lt;h4 id=&quot;how-word2vec-works&quot;&gt;How Word2Vec Works&lt;/h4&gt;
+
+&lt;p&gt;Word2Vec is a method for creating word embeddings where a neural network with one hidden layer is trained on a “fake” task. The task essentially goes like this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A word window is created with a center (the “input word”) and words surrounding the center (the number of surrounding words taken into account can be specified with the “window size” hyperparameter). The center is initially the first word of the text.&lt;/li&gt;
+  &lt;li&gt;Ordered pairs are then formed with the first entry of each pair being the center word and the second entry being one of the other words in the window. Each of these ordered word pairs is used as a training sample for the network (the first entry is used as the input word and the second entry is used as the output word).&lt;/li&gt;
+  &lt;li&gt;Each of the words is represented as a one-hot vector (a vector with &lt;em&gt;n&lt;/em&gt;-dimensions where &lt;em&gt;n&lt;/em&gt; is the size of our vocabulary and all entries are zero except for the word we’re representing which is a 1). Training the model on these samples leads to it learning how likely each output word is to appear close to the input word.&lt;/li&gt;
+  &lt;li&gt;The window is then shifted one step to the right and steps 1-3 are repeated until all possible words pairs have been found on the text and used on the model for training.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The model itself consists of three fully-connected layers. The first is the input layer where the one-hot vector of the input word is fed into. The second layer is the only hidden layer of the model and consists of &lt;em&gt;e&lt;/em&gt; units where &lt;em&gt;e&lt;/em&gt; is the size of the embedding space you want to use (this size is a hyperparameter you get to tune and essentially represents the number of distinct semantic features you would like your model to represent). Note that the second layer has no activation function. The third layer is the output layer. The output of the model is an &lt;em&gt;n&lt;/em&gt;-dimensional vector where each entry is the probability (determined by a softmax activation function) of each word being “near” the input word. Now here’s where some of the real magic comes in with Word2Vec: once training on this task is complete, we simply throw away the output layer (hence why the task is considered “fake”) so that the output of the network will be the weights of the hidden layer. This new &lt;em&gt;e&lt;/em&gt;-dimensional output layer is a vector that “points” to where the word is in the embedding space and is closer to similar words and further from dissimilar words along the appropriate dimensions. Isn’t that just so amazing?!&lt;/p&gt;
+
+&lt;h4 id=&quot;the-rest-of-the-authors-method&quot;&gt;The Rest of the Authors’ Method&lt;/h4&gt;
+
+&lt;p&gt;The authors decided to use a dump of Wikipedia as their corpus (specifically a dump from August 2015). They lemmatized, tagged, and parsed the corpus using Stanford CoreNLP. There were two sets of embeddings (each with 100 dimensions) found using two separate passes over the corpus. The first pass was for finding word embeddings and the second for finding phrase embeddings. In this second pass, the vectorized forms of all of the contexts from the first pass remained the same. Since only verb-noun and adjective-noun phrases were used for finding metaphoricity, all phrases that did not fit this form were filtered out. All of these embeddings were trained on the corpus for 3 epochs with a context window of 5, and 10 negative-samples for every word-context pair.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NLP Definitions&lt;/strong&gt; &lt;strong&gt;Lemmatization&lt;/strong&gt; - The process of grouping together all inflected forms of a word so that they are processed as a single kind.
+&lt;strong&gt;Tagging&lt;/strong&gt; - (aka part of speech tagging) A process where all words in a corpus are marked with the part of speech they correspond to.
+&lt;strong&gt;Parsing&lt;/strong&gt; - Representing the grammatical structure of sentences.&lt;/p&gt;
+
+&lt;h3 id=&quot;learning-visual-representations&quot;&gt;Learning Visual Representations&lt;/h3&gt;
+
+&lt;p&gt;The authors used &lt;a href=&quot;http://caffe.berkeleyvision.org/&quot;&gt;Caffe&lt;/a&gt; to build a convolutional neural network which they trained and then extracted image embeddings from. Their network had 5 convolutional layers followed by two fully-connected layers and finally a softmax layer for classification. They used a multinomial logistic regression as their objective function. They obtained their image embeddings in a similar way to how word embeddings are obtained in Word2Vec, namely cutting off the last layer after the model has been trained and using the output from the formerly second to last layer. In this case that penultimate layer was outputting a vector for a 4096-dimensional embedding space (which is just huge). These visual embeddings were created by using 10 images for every word and phrase obtained from the corpus in the “Learning Linguistic Representations” section. These images were obtained via Google Images. The final visual embeddings for each class were found by taking the average of each of the embedding vectors given for each sample fed into the model.&lt;/p&gt;
+
+&lt;h3 id=&quot;multimodal-fusion-strategies&quot;&gt;Multimodal Fusion Strategies&lt;/h3&gt;
+
+&lt;p&gt;In this section the authors describe different approaches to fusing representations from distinct modes of input and discuss the strategies they chose to employ. Multimodal fusion is necessary since they are trying to get results on how combining multiple modes of representation can affect learning of metaphoricity. The best approach (to avoid problems with data sparsity and poor performance) is usually to independently learn uni-modal representations (as described in the previous two sections) and then combine (i.e. “fuse” them) later in the process. After this fusing process the representations are now multimodal. Previous work (namely &lt;a href=&quot;https://www.jair.org/media/4135/live-4135-7609-jair.pdf&quot;&gt;Bruni et al., 2014&lt;/a&gt;) discussed different ways of combining (fusing) linguistic and perceptual modes. There are three different kinds of fusing:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Early fusion: Directly combines the representations from all the different modes first. No similarity score is (directly) computed and the joint representation is fed to the model as-is.&lt;/li&gt;
+      &lt;li&gt;Middle fusion: Combines the representations from the different modes and then calculates similarity scores (these scores are relevant because metaphor by definition is dealing with the similarity of representations between two things).&lt;/li&gt;
+      &lt;li&gt;Late fusion: Similarity scores are computed independently for each mode and then combined.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The authors exclusively experimented with middle and late fusion. When using middle fusion, they &lt;a href=&quot;http://www.chioka.in/differences-between-the-l1-norm-and-the-l2-norm-least-absolute-deviations-and-least-squares/&quot;&gt;L2 normalized&lt;/a&gt; and concatenated the vectors for linguistic and visual representations and computed a metaphoricity score based on this joint representation. With late fusion, they computed the metaphoricity scores independently for each mode and then combined the scores by taking their average.&lt;/p&gt;
+
+&lt;h3 id=&quot;measuring-metaphoricity&quot;&gt;Measuring Metaphoricity&lt;/h3&gt;
+
+&lt;p&gt;The goal of this section is to investigate different operations on the embedding vectors for figuring out whether or not two words in a phrase belong to the same or similar domains. The first set of experiments was done on the word-level embeddings acquired from the first pass over the corpus. These experiments used the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cosine_similarity&quot;&gt;cosine similarity metric&lt;/a&gt; to determine whether or not two words belonged to the same domain. If the cosine similarity was high, the words were very likely from the same domain. If it was low, they were likely not from the same domain whatsoever. This metric was referred to as WordCos for the rest of the paper. The second set of experiments was done on the phrase-level embeddings acquired from the second pass over the corpus. The embeddings learned for the entire phrase are compared with the embeddings of each of the words that make the phrase up. This serves as a way to see whether or not the two words in the phrase are in similar domains or not. If they’re not, the similarity between one word and the entire phrase will be low. There are three different pairs of vectors that are used with the cosine similarity metric. Here are each of the pairs:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;PhrasCos1: &lt;em&gt;phrase&lt;/em&gt; - &lt;em&gt;word1&lt;/em&gt;, &lt;em&gt;word2&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;PhrasCos2: &lt;em&gt;phrase&lt;/em&gt; - &lt;em&gt;word2&lt;/em&gt;, &lt;em&gt;word1&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;PhrasCos3: &lt;em&gt;phrase&lt;/em&gt;, &lt;em&gt;word1&lt;/em&gt; + &lt;em&gt;word2&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The authors then used a small set of phrases (annotated as metaphorical or literal) to find an optimal classification threshold for each of the similarity metrics from above. The threshold was obtained and optimized by maximizing accuracy on this development set. Instances with values exceeding the threshold were considered literal with the remainder being considered metaphorical.&lt;/p&gt;
+
+&lt;h2 id=&quot;experiments&quot;&gt;Experiments&lt;/h2&gt;
+
+&lt;h3 id=&quot;annotated-datasets&quot;&gt;Annotated Datasets&lt;/h3&gt;
+
+&lt;p&gt;The authors used two datasets that had been manually annotated for metaphoricity. The dataset from &lt;a href=&quot;http://www.aclweb.org/anthology/S16-2003&quot;&gt;Mohammed et al.&lt;/a&gt; used verbs from WordNet that had between three and ten senses and the sentences showing them off from their corresponding glosses. The way each of the verbs were used in the sentences (of which there were 1639) were each annotated by 10 annotators. Mohammad et al. then used the verbs that were tagged by 70% or more of the annotators as either metaphorical or literal as their dataset. The authors of the present paper further filtered that data by exclusively extracting verb-direct object and verb-subject relations from the dataset. This led to only 647 instances. 316 were metaphorical and 331 were literal. &lt;a href=&quot;http://www.aclweb.org/anthology/W13-0906&quot;&gt;Tsvetkov et al.&lt;/a&gt; on the other hand annotated adjective-noun pairs for metaphoricity rather than verb-noun pairs. They took a list of 1000 common adjectives and extracted nouns that each of the adjectives co-occurred with from the TenTen Web Corpus. Tsvetkov et al. then divided their dataset into training and testing sets. The training set had 1768 samples in total and the testing set had 222 samples in total. Each set had equal numbers of literal and metaphorical samples. Metaphorical phrases that depended on a larger context in order to be interpreted correctly were removed. The authors selected these two datasets specifically because each of the verbs and adjectives had multiple senses in which they could be used. This allows for testing on how well the model can discriminate between the different senses in which a word can be used rather than just selecting the word’s most frequent classification.&lt;/p&gt;
+
+&lt;h3 id=&quot;experimental-setup&quot;&gt;Experimental Setup&lt;/h3&gt;
+
+&lt;p&gt;The authors then divided each of these datasets up into development (aka training) and test sets. The Mohammad et al. development set contained 80 items (even split of metaphorical and literal instances) with the remainder being used as the test set. The Tsvetkov et al. development set contained the same number extracted from the pre-made training set and they did not have to create a separate testing set since it had already been created. The authors experimented with the word-level similarity and all three phrase-level similarity inputs listed above. However, the first outperformed the other two during training so only the word-level and the first phrase-level similarity methods were used for testing. The word-level and the chosen phrase-level similarities were first evaluated using the the linguistic and visual representations in isolation. They were then evaluated with the multimodal vectors attained from the middle- and late-fusion strategies the authors implemented.&lt;/p&gt;
+
+&lt;h3 id=&quot;results-and-discussion&quot;&gt;Results and Discussion&lt;/h3&gt;
+
+&lt;p&gt;The authors used three different evaluation metrics for their methods: precision, recall, and F-score. I took screenshots of each of the result tables: &lt;img src=&quot;http://tomlisankie.com/blog/wp-content/uploads/2018/04/Screen-Shot-2018-04-24-at-11.50.41-AM-300x220.png&quot; alt=&quot;&quot; /&gt; &lt;img src=&quot;http://tomlisankie.com/blog/wp-content/uploads/2018/04/Screen-Shot-2018-04-24-at-11.48.36-AM-300x220.png&quot; alt=&quot;&quot; /&gt; WordCos (with linguistic representations in isolation) outperforms PhrasCos1 by 17-19% on both verb-noun and adjective-noun pairs which suggests that information on the domains in which words belong is already captured successfully by the word embedding space. The opposite is true with visual data in isolation though. What PhrasCos1 measures is how semantically close the two words are that make up the phrase. In metaphorical language, there is a transfer of meaning and this ceases to be the case. Since there are no linguistic conventions or stylistic effects that take place with visual data, PhrasCos1 is better able to capture this effect. The trend was more clear with adjective-noun pairs than with verb-noun pairs. This suggests that identification of adjectival metaphors is highly informed by visual features. The multimodal methods outperformed both the isolated linguistic and visual models. This clearly demonstrates that visual features have some utility in metaphor detection. The MixLate late fusion method performs the best out of the fusion methods. This is probably because it fuses the highest performing similarity metrics for each respective representation (WordCos for linguistic representations and PhrasCos1 for visual representations). There are also a couple of good reasons for why there is a difference in performance on adjective-noun pairs and verb-noun pairs:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12076&quot;&gt;Previous psycholinguistic research&lt;/a&gt; suggests that people find it easier to make judgements on the concreteness of adjectives and nouns compared to verbs. Thus, the visual representations in these models may capture the concreteness of adjectives and nouns but may have trouble capturing the same qualities of verbs. The semantics of verbs are often grounded in motor activity and perception of that motor activity as opposed to being more static like adjectives and nouns.&lt;/li&gt;
+  &lt;li&gt;The visual data in the models in this paper are images rather than videos. Thus, perception of non-static actions is hindered.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Additionally, the authors performed another experiment where they evaluated the models on the larger portion of the training set from Tsvetkov et al. The trends observed were the same as with the smaller testing set. Something else noteworthy about this paper is that the authors were able to achieve pretty decent results with a fairly small development set for learning optimal thresholds. The reason this works is that necessary lexical knowledge, domain knowledge, and other properties are already encoded in the linguistic and visual embedding spaces. In order to see that these results weren’t just some fluke, the authors split the training set of Tsvetkov et al. into 10 separate datasets that each contained around 170 samples and were balanced for metaphoricity (even numbers of literal and metaphorical samples). They trained the thresholds on 170 samples and then added an additional ~170 with each round of training. The thresholds turned out to be relatively stable with a standard deviation of only 0.03 for MixLate. Despite how few training samples the authors used, the results were comparable to those of other research that used far more data and used hand-annotated resources. The authors find this to be very encouraging.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;The authors of this paper presented the first method of using visual features in metaphor identification. Their results demonstrate that using multimodal representations outperform language-only representations. This suggests that visual information is very important in metaphor processing. Since the authors used a data-driven approach of learning visual features and linguistic features, possible noise from human annotation was avoided. Because of this, their methods can be applied to any text in any domain and easily reshaped for other metaphor processing tasks. The authors feel that it would be interesting in the future to apply similar multimodal embeddings to automatically interpret metaphorical language. They would also like to see automatic application of these embeddings in order to generalize associations between distinct concepts and domains.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;recreation&quot;&gt;Recreation&lt;/h1&gt;
+
+&lt;p&gt;In this section I outline the steps I took to recreate the paper and any pitfalls I may have experienced.&lt;/p&gt;
+
+&lt;h2 id=&quot;acquiring-the-data&quot;&gt;Acquiring the Data&lt;/h2&gt;
+
+&lt;p&gt;The first step I had to take in order to begin the project was acquiring the data. The first dataset I acquired was the verb-noun dataset from Mohammad et al. It was not difficult to acquire since the link to the data was &lt;a href=&quot;http://saifmohammad.com/WebPages/metaphor.html&quot;&gt;directly available&lt;/a&gt; from the website of the named author. Finding the adjective-noun dataset was not as straightforward. The authors did not give a link to the completed dataset within their paper. I googled around a bit but could not find it listed anywhere. I decided to directly contact one of the authors instead (&lt;a href=&quot;http://www.cs.cmu.edu/~ytsvetko/&quot;&gt;Yulia Tsvetkov&lt;/a&gt;) who gladly provided me with the dataset. I should note though that Yulia pointed out to me that she believes the paper the authors were referencing was not the one they cited (namely “Cross-lingual metaphor detection using common semantic features”) but instead a 2014 paper that had some similar phrasing in the title called “Metaphor Detection with Cross-Lingual Model Transfer” which is why I could not directly find the dataset myself even though it is available online. Next up was developing the corpus to train my Word2Vec model. I downloaded a recent dump of the English Wikipedia (the one the authors used is no longer available from Wikimedia because of its age, so close enough) and began to train a Word2Vec model using the &lt;a href=&quot;https://fasttext.cc&quot;&gt;fastText&lt;/a&gt; implementation as a test run since I’ve never trained a Word2Vec model from scratch before. However, I quickly realized that this was going to be a huge time suck and keep me from moving on to other parts of the paper at a reasonable rate since fastText was telling me it was going to take 11-12 hours to train this model and even then this was just a dummy model anyway. I was still going to have to do the preprocessing talked about in the paper of lemmatization, tagging, and parsing of the entire Wikipedia. Instead, I decided to contact the authors to see if they still had the corpus from this paper lying around. Turns out one of the authors (&lt;a href=&quot;http://www.maillard.it/&quot;&gt;Jean Maillard&lt;/a&gt;) did and he uploaded the corpus along with the scripts used to create it and a well-made README for me to download. Fantastic! The entire preprocessed Wiki, even with all the extra data from preprocessing, was far smaller (and streamable, yay) than the original Wiki dump I had downloaded because of being in the MessagePack format. So now I had instructions on how to use the exact corpus the authors used and didn’t have to make my own. The only problem was I was gonna have to use a different implementation of Word2Vec.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;analysis&quot;&gt;Analysis&lt;/h1&gt;</content><author><name>Thomas Lisankie</name></author><category term="machine learning" /><summary type="html">I recently decided to replicate a really interesting paper I read on identifying metaphors in text with word embeddings and visual features. The paper is called Black Holes and White Rabbits: Metaphor Identification with Visual Features and it is the first paper that uses word and phrase embeddings for metaphor identification as well as the first paper that integrates representations found from both linguistic and visual data. I’ve been extremely interested in machine learning techniques and others for identifying conceptual metaphors and other for a couple of years now. Not only is it ridiculously interesting, but I think it’s one of the most important areas to be worked on in NLP for drastically decreasing the friction involved in interacting with natural language systems. Given the prevalence of analogy, conceptual metaphor, and other forms of domain transfer in our everyday language, progress on this problem would lead to drastic improvement in natural language processing systems and possibly even the beginning of true natural language understanding systems. Because of all these reasons, I saw replicating this paper as a worthwhile effort in order to get a feel for the amount of work that went into it, gain further experience with building NLP systems, and have my own copy of the work to use in my own projects.</summary></entry><entry><title type="html">First Post and Why I Have Never Seriously Blogged Before</title><link href="/2016/09/06/first-post-and-why-ive-never-seriously-blogged-before/" rel="alternate" type="text/html" title="First Post and Why I Have Never Seriously Blogged Before" /><published>2016-09-06T18:31:02-04:00</published><updated>2016-09-06T18:31:02-04:00</updated><id>/2016/09/06/first-post-and-why-ive-never-seriously-blogged-before</id><content type="html" xml:base="/2016/09/06/first-post-and-why-ive-never-seriously-blogged-before/">&lt;p&gt;I’m constantly writing little notes on my iPhone that relate to things I’ve been thinking about. They’re usually not ever really fully formed thoughts or anything that would make sense to anyone else reading them without the context of the schema in my head, but they are some sort of structured thought nonetheless.&lt;/p&gt;
+
+&lt;p&gt;But I’ve never really blogged before. There’s a few reasons for this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I don’t like the idea of everyone knowing what I’m thinking all the time.&lt;/li&gt;
+  &lt;li&gt;It takes so much effort to actually elaborate on all these thoughts and communicate them clearly.&lt;/li&gt;
+  &lt;li&gt;It also takes time just to maintain a blog and regularly update. Sort of like having some sort of pet.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But recently I’ve been reading through a copy of &lt;a href=&quot;https://www.amazon.com/Boy-Who-Could-Change-World/dp/162097066X/ref=sr_1_1?ie=UTF8&amp;amp;qid=1473214572&amp;amp;sr=8-1&amp;amp;keywords=aaron+swartz&quot;&gt;The Boy Who Could Change the World: The Writings of Aaron Swartz&lt;/a&gt; that a friend gave me which, if you don’t know, basically contains a bunch of stuff that &lt;a href=&quot;http://aaronsw.com/&quot;&gt;Aaron Swartz&lt;/a&gt; wrote in his short time here on Earth. Most of the content is Swartz’s blog posts, some of it is transcripts from videos of him speaking, essays he wrote for books, etc. And reading through it has inspired me to take this up since the content which Swartz writes about is similar to what I’d write about in a blog. He also has a very similar writing style to me. All of this combined makes me think “oh, I can probably do this too” especially since the idea of having my own little sort of “island” (website) on the Internet has always appealed to me ever since I was a little kid.&lt;/p&gt;
+
+&lt;p&gt;I have tried my hand at blogging before. At first it was on my first site that I made when I was in fourth grade called tomo285.com (it’s a dead link, I let the service expire a long time ago. Named after my AIM screen name). I would mainly talk about Nintendo news as well as write these biographies of characters from The Legend of Zelda series. I eventually lost interest in this but I was pretty consistent about it and was getting a few hundred unique page views per month.&lt;/p&gt;
+
+&lt;p&gt;The second time I did some blogging was back before Shaken Earth was the name of my company and was instead just my online handle and the name of a blog I made in sixth grade. I had nearly no posts on it but it was mainly just updates on this program I was writing as I had taught myself Java called Phrasebot.&lt;/p&gt;
+
+&lt;p&gt;I think what was really inhibiting me previously from blogging was my feeling that each post had to be super well done and not just what was on my mind and ideas I had thinking about. I felt that each post had to be super complete. This makes sense given that I was recently diagnosed with &lt;a href=&quot;https://en.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder&quot;&gt;OCD&lt;/a&gt;. And I’ve sort of been coming to realize not even just recently but over the last year or two that that’s not even a very great way to live.&lt;/p&gt;
+
+&lt;p&gt;But I also want to have a place on the web to spill my ideas and thoughts onto in long form in an environment that I effectively have full jurisdiction over.&lt;/p&gt;
+
+&lt;p&gt;So welcome to my blog. I’ll think of a name as I continue adding posts, but for now it’s unnamed.&lt;/p&gt;</content><author><name>Thomas Lisankie</name></author><category term="early days" /><summary type="html">I’m constantly writing little notes on my iPhone that relate to things I’ve been thinking about. They’re usually not ever really fully formed thoughts or anything that would make sense to anyone else reading them without the context of the schema in my head, but they are some sort of structured thought nonetheless.</summary></entry></feed>

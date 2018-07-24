@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Prhymer: How It Works | GOMT</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Prhymer: How It Works" />
+<meta name="author" content="Thomas Lisankie" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found here). However, it can be generalized to be a global sequence alignment algorithm. The steps for this algorithm are as follows:" />
+<meta property="og:description" content="Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found here). However, it can be generalized to be a global sequence alignment algorithm. The steps for this algorithm are as follows:" />
+<link rel="canonical" href="/2017/03/15/prhymer-how-it-works/" />
+<meta property="og:url" content="/2017/03/15/prhymer-how-it-works/" />
+<meta property="og:site_name" content="GOMT" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-03-15T16:48:10-04:00" />
+<script type="application/ld+json">
+{"url":"/2017/03/15/prhymer-how-it-works/","headline":"Prhymer: How It Works","dateModified":"2017-03-15T16:48:10-04:00","datePublished":"2017-03-15T16:48:10-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"/2017/03/15/prhymer-how-it-works/"},"author":{"@type":"Person","name":"Thomas Lisankie"},"description":"Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found here). However, it can be generalized to be a global sequence alignment algorithm. The steps for this algorithm are as follows:","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="GOMT" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">GOMT</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Prhymer: How It Works</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-03-15T16:48:10-04:00" itemprop="datePublished">Mar 15, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Thomas Lisankie</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Prhymer is an algorithm I originally made for comparing two words (defined in this case to simply be sequences of phonemes) in order to see how well they rhyme i.e. how similar they are in pronunciation. (Links to my implementations can be found <a href="http://tomlisankie.com/projects/prhymer/">here</a>). However, it can be generalized to be a <a href="https://en.wikipedia.org/wiki/Sequence_alignment#Global_and_local_alignments">global sequence alignment algorithm</a>. The steps for this algorithm are as follows:</p>
+
+<ol>
+  <li>Two sequences of elements are taken as input. We will label the shorter sequence as  <img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" />and the longer sequence as <img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /></li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(if the sequences are of the same length it is arbitrary which sequence is labeled as  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;and which is labeled as &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;). Let  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-95d052bbdff5939edc0f8d73be3abe3f_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#109;" title="Rendered by QuickLaTeX.com" height="8" width="15" style="vertical-align: 0px;" /&gt;be the number of elements in &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt; and let &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c972962b2b6b29aedf521d48a070fff3_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#110;" title="Rendered by QuickLaTeX.com" height="8" width="11" style="vertical-align: 0px;" /&gt; be the number of elements in &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;.   2. Find the Cartesian product of &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt; and  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;and let&amp;#8217;s call it &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-3be05a969a6ec808074a0ddcde01e03c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#80;" title="Rendered by QuickLaTeX.com" height="12" width="14" style="vertical-align: 0px;" /&gt;: &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c38132ec0d08c897af0d888bd8176f49_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#80;&amp;#32;&amp;#61;&amp;#32;&amp;#92;&amp;#108;&amp;#101;&amp;#102;&amp;#116;&amp;#32;&amp;#92;&amp;#123;&amp;#32;&amp;#83;&amp;#32;&amp;#92;&amp;#116;&amp;#105;&amp;#109;&amp;#101;&amp;#115;&amp;#32;&amp;#76;&amp;#32;&amp;#61;&amp;#32;&amp;#40;&amp;#115;&amp;#44;&amp;#32;&amp;#108;&amp;#41;&amp;#92;&amp;#58;&amp;#32;&amp;#124;&amp;#92;&amp;#58;&amp;#32;&amp;#115;&amp;#32;&amp;#92;&amp;#105;&amp;#110;&amp;#32;&amp;#83;&amp;#44;&amp;#32;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#32;&amp;#92;&amp;#105;&amp;#110;&amp;#32;&amp;#76;&amp;#32;&amp;#92;&amp;#114;&amp;#105;&amp;#103;&amp;#104;&amp;#116;&amp;#32;&amp;#92;&amp;#125;" title="Rendered by QuickLaTeX.com" height="19" width="264" style="vertical-align: -5px;" /&gt;   3. Now let&amp;#8217;s define a matrix &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-f200273c73dab75f221b7a72aa083e3b_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#77;" title="Rendered by QuickLaTeX.com" height="12" width="19" style="vertical-align: 0px;" /&gt; on the product &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-3be05a969a6ec808074a0ddcde01e03c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#80;" title="Rendered by QuickLaTeX.com" height="12" width="14" style="vertical-align: 0px;" /&gt; found in step 2 such that &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-c463c62981eec4e55a85d4ad2d315016_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#77;&amp;#32;&amp;#61;&amp;#32;&amp;#92;&amp;#98;&amp;#101;&amp;#103;&amp;#105;&amp;#110;&amp;#123;&amp;#98;&amp;#109;&amp;#97;&amp;#116;&amp;#114;&amp;#105;&amp;#120;&amp;#125;&amp;#32;&amp;#38;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#41;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#99;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#110;&amp;#45;&amp;#49;&amp;#125;&amp;#41;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#92;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#118;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#100;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#118;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#92;&amp;#32;&amp;#38;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#109;&amp;#45;&amp;#49;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#41;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#99;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#109;&amp;#45;&amp;#49;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#110;&amp;#45;&amp;#49;&amp;#125;&amp;#41;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#101;&amp;#110;&amp;#100;&amp;#123;&amp;#98;&amp;#109;&amp;#97;&amp;#116;&amp;#114;&amp;#105;&amp;#120;&amp;#125;" title="Rendered by QuickLaTeX.com" height="76" width="314" style="vertical-align: -34px;" /&gt;   4. The row echelon form will then be taken on matrix &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-f200273c73dab75f221b7a72aa083e3b_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#77;" title="Rendered by QuickLaTeX.com" height="12" width="19" style="vertical-align: 0px;" /&gt;. This is done to preserve order and make sure no &amp;#8220;best&amp;#8221; ordered pairs are found on one row that are ahead of best ordered pairs found in later rows as we will see later. Let&amp;#8217;s call the row echelon form  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-45b2f360c5b52f6c4702720ef7bec03c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#82;" title="Rendered by QuickLaTeX.com" height="12" width="14" style="vertical-align: 0px;" /&gt;such that &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-59a4748b742187323ba187ddc31bb142_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#82;&amp;#32;&amp;#61;&amp;#32;&amp;#92;&amp;#98;&amp;#101;&amp;#103;&amp;#105;&amp;#110;&amp;#123;&amp;#98;&amp;#109;&amp;#97;&amp;#116;&amp;#114;&amp;#105;&amp;#120;&amp;#125;&amp;#32;&amp;#38;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#41;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#99;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#48;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#110;&amp;#45;&amp;#49;&amp;#125;&amp;#41;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#92;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#118;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#100;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#118;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#92;&amp;#32;&amp;#38;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#109;&amp;#45;&amp;#49;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#110;&amp;#45;&amp;#109;&amp;#45;&amp;#49;&amp;#125;&amp;#41;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#92;&amp;#99;&amp;#100;&amp;#111;&amp;#116;&amp;#115;&amp;#32;&amp;#92;&amp;#59;&amp;#92;&amp;#59;&amp;#32;&amp;#40;&amp;#115;&amp;#95;&amp;#123;&amp;#109;&amp;#45;&amp;#49;&amp;#125;&amp;#44;&amp;#92;&amp;#58;&amp;#32;&amp;#108;&amp;#95;&amp;#123;&amp;#110;&amp;#45;&amp;#49;&amp;#125;&amp;#41;&amp;#32;&amp;#38;&amp;#32;&amp;#92;&amp;#101;&amp;#110;&amp;#100;&amp;#123;&amp;#98;&amp;#109;&amp;#97;&amp;#116;&amp;#114;&amp;#105;&amp;#120;&amp;#125;" title="Rendered by QuickLaTeX.com" height="76" width="351" style="vertical-align: -34px;" /&gt;   5. We then apply a similarity/cost function,  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-4a6a1a29318309672acf99704b5703a3_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#99;&amp;#40;&amp;#40;&amp;#115;&amp;#44;&amp;#108;&amp;#41;&amp;#41;" title="Rendered by QuickLaTeX.com" height="18" width="56" style="vertical-align: -4px;" /&gt;to all ordered pairs in &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-45b2f360c5b52f6c4702720ef7bec03c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#82;" title="Rendered by QuickLaTeX.com" height="12" width="14" style="vertical-align: 0px;" /&gt;.   6. Starting at row &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-95d052bbdff5939edc0f8d73be3abe3f_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#109;" title="Rendered by QuickLaTeX.com" height="8" width="15" style="vertical-align: 0px;" /&gt;, we find the ordered pair within the range  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-972003edbcd37ab224ff577f7d669a45_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#48;&amp;#32;&amp;#92;&amp;#108;&amp;#101;&amp;#113;&amp;#32;&amp;#105;" title="Rendered by QuickLaTeX.com" height="15" width="39" style="vertical-align: -3px;" /&gt;where, initially,  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-1e432c94637061c416641846150cb4ec_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#105;&amp;#32;&amp;#61;&amp;#32;&amp;#110;" title="Rendered by QuickLaTeX.com" height="12" width="41" style="vertical-align: 0px;" /&gt;with the highest similarity (or lowest if it&amp;#8217;s a cost function) and add it to the similarity/cost values of the ordered pairs in the row above it (in this case row &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-19985356f2ebafe23198a171ba714423_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#109;&amp;#45;&amp;#49;" title="Rendered by QuickLaTeX.com" height="13" width="45" style="vertical-align: -1px;" /&gt;).   7. We set  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-67494ad7556bce61778e1cf04bd3006b_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#105;" title="Rendered by QuickLaTeX.com" height="12" width="6" style="vertical-align: 0px;" /&gt;to whatever index that the ordered pair from step 6 was found at to a list of indices  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-0483fc2127dc46ac432b570290161e5d_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#73;" title="Rendered by QuickLaTeX.com" height="12" width="9" style="vertical-align: 0px;" /&gt;that we will later apply a gap penalty function to.   8. Steps 6-7 are repeated until all rows have been examined. The total similarity/cost value that was found is then stored in &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-38ae40ac683a606b2770cce5b8ca8237_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#116;" title="Rendered by QuickLaTeX.com" height="12" width="6" style="vertical-align: 0px;" /&gt;.   9. A gap penalty function  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-5250cbfab192d7d52affc80ef9fedcfe_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#112;&amp;#40;&amp;#73;&amp;#41;" title="Rendered by QuickLaTeX.com" height="18" width="32" style="vertical-align: -4px;" /&gt;is then applied to the list of indices  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-0483fc2127dc46ac432b570290161e5d_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#73;" title="Rendered by QuickLaTeX.com" height="12" width="9" style="vertical-align: 0px;" /&gt;and subtracted from  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-38ae40ac683a606b2770cce5b8ca8237_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#116;" title="Rendered by QuickLaTeX.com" height="12" width="6" style="vertical-align: 0px;" /&gt;so that  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35039793b5e01ebf394f7b0608047964_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#102;&amp;#32;&amp;#61;&amp;#32;&amp;#116;&amp;#32;&amp;#45;&amp;#32;&amp;#112;&amp;#40;&amp;#73;&amp;#41;" title="Rendered by QuickLaTeX.com" height="18" width="93" style="vertical-align: -4px;" /&gt;where &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-d87eed044670eb60b7d80f75e60d6aaa_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#102;" title="Rendered by QuickLaTeX.com" height="16" width="10" style="vertical-align: -4px;" /&gt;is the final similarity/cost score between the sequences  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;and &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;.  10. However, finding the similarity score is not enough since scores will vary relative to the sizes of the two sequences. For example, two small yet highly similar sequences may have a similarity score of 3 while two large yet dissimilar sequences may have a similarity score of 10. Thus, it is important to find a percentage of similarity for any two given sequences. To do this we simply find the similarity score (steps 1-9) of sequence  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;on itself (let&amp;#8217;s call this&lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-cd244aecfeaff20796a3225a17f333e6_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#104;" title="Rendered by QuickLaTeX.com" height="13" width="10" style="vertical-align: 0px;" /&gt;) and divide  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-d87eed044670eb60b7d80f75e60d6aaa_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#102;" title="Rendered by QuickLaTeX.com" height="16" width="10" style="vertical-align: -4px;" /&gt;by  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-cd244aecfeaff20796a3225a17f333e6_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#104;" title="Rendered by QuickLaTeX.com" height="13" width="10" style="vertical-align: 0px;" /&gt;to get the similarity (or dissimilarity if it was a cost function that was applied) ratio which we can then turn into a percentage where &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-49a2bdb80083d650a843219c2f55dc76_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#114;&amp;#32;&amp;#61;&amp;#32;&amp;#92;&amp;#102;&amp;#114;&amp;#97;&amp;#99;&amp;#123;&amp;#102;&amp;#125;&amp;#123;&amp;#104;&amp;#125;&amp;#92;&amp;#99;&amp;#100;&amp;#111;&amp;#116;&amp;#32;&amp;#49;&amp;#48;&amp;#48;&amp;#32;&amp;#92;&amp;#37;" title="Rendered by QuickLaTeX.com" height="23" width="98" style="vertical-align: -6px;" /&gt;  11. We&amp;#8217;re not done yet. Some sequences may actually have a higher similarity percentage by removing elements starting from the first element of  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;and repeating steps 1-10 on the newly formed  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;and the original  &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-35099fe3acb43f598fa0fec9d55e0844_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#76;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;(this is especially important for the original purpose of Prhymer since some shorter words may rhyme in the middle of the longer). Once there are no more elements in &lt;img src="http://tomlisankie.com/blog/wp-content/ql-cache/quicklatex.com-df3618c96b55f38439e047834d452263_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&amp;#83;" title="Rendered by QuickLaTeX.com" height="12" width="12" style="vertical-align: 0px;" /&gt;, the highest similarity percentage is chosen as the &amp;#8220;true&amp;#8221; similarity score.
+</code></pre></div></div>
+
+<hr />
+
+<p>Now that we have a step by step procedure, let’s do an example on two words. But before we do our example, we must define our similarity function for an ordered pair of phonemes as well as our gap penalty function. The similarity function will award a score based on the following table:</p>
+
+<table style="width: 625px; height: 193px;" border="2" cellpadding="2">
+  <tr>
+    <td style="width: 120px;">
+       <strong>Comparison Case</strong>
+    </td>
+    
+    <td style="width: 502px;">
+       <strong>Number of Points Awarded</strong>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="width: 120px;">
+       Vowel and Vowel
+    </td>
+    
+    <td style="width: 502px;">
+       5 &#8211; (number of features they don&#8217;t share) &#8211; (difference in stress)
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="width: 120px;">
+       Consonant and Consonant
+    </td>
+    
+    <td style="width: 502px;">
+       2 &#8211; (0.15 * (number of features they don&#8217;t share)) &#8211; (0.1 if they both aren&#8217;t voiced) &#8211; (1 if they both aren&#8217;t sonorous)
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="width: 120px;">
+       Vowel and Consonant
+    </td>
+    
+    <td style="width: 502px;">
+      (0.1 * (the number of features that they have in common)) + (0.1 if they both are voiced) + (1 if they&#8217;re both sonorous)
+    </td>
+  </tr>
+</table>
+
+<p>The features that are referred to are <a href="https://en.wikipedia.org/wiki/Distinctive_feature">distinctive features</a>. A list of the features that are used in the implementation can be found <a href="http://tomlisankie.com/pronunciation-algorithm-resources/feature-to-number-reference.txt">here</a>. In addition, the phonemes that are used for words come from the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronouncing Dictionary</a> and the list of the phonemes and their respective features that will be used can be found <a href="http://tomlisankie.com/pronunciation-algorithm-resources/features.txt">here</a>.</p>
+
+<p>The gap penalty function is as follows: ((number of spaces between indices of ordered pairs) * 0.25) + log(1 + number of spaces from first ordered pair used to 0) + log(number of spaces from last ordered pair used to length of longest sequence + 1).</p>
+
+<p>Using this, let’s go through an example using the words “ship” (SH IH1 P) and “shifter” (SH IH1 F T ER0). Let’s just skip right ahead to the matrix found on the Cartesian product of these two sequences:</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      (SH, SH)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, IH1)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, F)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, T)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, ER0)
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, SH)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, IH1)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, F)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, T)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, ER0)
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+      (P, SH)
+    </td>
+    
+    <td class="tg-031e">
+      (P, IH1)
+    </td>
+    
+    <td class="tg-031e">
+      (P, F)
+    </td>
+    
+    <td class="tg-031e">
+      (P, T)
+    </td>
+    
+    <td class="tg-031e">
+       (P, ER0)
+    </td>
+  </tr>
+</table>
+
+<p>Let’s take the row echelon form on it:</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      (SH, SH)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, IH1)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, F)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, T)
+    </td>
+    
+    <td class="tg-031e">
+      (SH, ER0)
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, IH1)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, F)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, T)
+    </td>
+    
+    <td class="tg-031e">
+      (IH1, ER0)
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      (P, F)
+    </td>
+    
+    <td class="tg-031e">
+      (P, T)
+    </td>
+    
+    <td class="tg-031e">
+       (P, ER0)
+    </td>
+  </tr>
+</table>
+
+<p>And let’s replace the ordered pairs with their numeric value after the similarity function is applied to all of them:</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      2
+    </td>
+    
+    <td class="tg-031e">
+      0.1
+    </td>
+    
+    <td class="tg-031e">
+      1.3
+    </td>
+    
+    <td class="tg-031e">
+      1.15
+    </td>
+    
+    <td class="tg-031e">
+      0.3
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      5
+    </td>
+    
+    <td class="tg-031e">
+      0.1
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      1
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      1.3
+    </td>
+    
+    <td class="tg-031e">
+      1.45
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+  </tr>
+</table>
+
+<p>And now let’s do steps 6-7 (detailed above) and keep track of the indices of the chosen ordered pairs. In addition a “-” will replace ordered pairs that can no longer be accessed along the way:</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      2
+    </td>
+    
+    <td class="tg-031e">
+      0.1
+    </td>
+    
+    <td class="tg-031e">
+      1.3
+    </td>
+    
+    <td class="tg-031e">
+      1.15
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      6.45
+    </td>
+    
+    <td class="tg-031e">
+      1.55
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+</table>
+
+<p>Indices: [3]</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      8.45
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+</table>
+
+<p>Indices: [3, 1]</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-031e">
+    </th>
+    
+    <th class="tg-e3zv">
+      SH
+    </th>
+    
+    <th class="tg-e3zv">
+      IH1
+    </th>
+    
+    <th class="tg-e3zv">
+      F
+    </th>
+    
+    <th class="tg-e3zv">
+      T
+    </th>
+    
+    <th class="tg-e3zv">
+      ER0
+    </th>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>SH</strong>
+    </td>
+    
+    <td class="tg-031e">
+      <em>8.45</em>
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>IH1</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-e3zv">
+      <strong>P</strong>
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+    
+    <td class="tg-031e">
+      &#8211;
+    </td>
+  </tr>
+</table>
+
+<p>Indices: [3, 1, 0]</p>
+
+<p>Now, we’ve reached the end of the process with 8.45 as our similarity score before the gap penalty is applied. Applying the gap penalty to the list of indices, we get (0.25*1) + log(1) + log(2) = 0.55. This means our final similarity score will be 8.45 – 0.55 = 7.9.</p>
+
+<p>But we’re not done yet. We now need to find the similarity score of SH IH1 F T ER0 on itself. This comes out to be 16. And then we calculate the similarity percentage as described in step 10 above and we get (7.9/16)*100% = 49.375%</p>
+
+<p>And now we of course go through step 11 by removing the entire first row of ordered pairs in our matrix and applying steps 1-10 on that matrix and so on. I’ll spare you and myself that process though since 49.375% ends up being the highest similarity out of any of these.</p>
+
+  </div><a class="u-url" href="/2017/03/15/prhymer-how-it-works/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">GOMT</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">GOMT</li><li><a class="u-email" href="mailto:thomas.lisankie@gmail.com">thomas.lisankie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/TomLisankie"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">TomLisankie</span></a></li><li><a href="https://www.twitter.com/TomLisankie"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">TomLisankie</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A blog where I get out my thoughts.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
