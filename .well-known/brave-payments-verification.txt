@@ -1,0 +1,4 @@
+This is a Brave Payments publisher verification file.
+
+Domain: tomlisankie.github.io
+Token: 83cc2ee95d31cbea06e1113acde1b5355884cad5f788ffdb01078a658715d2ab
